@@ -1,34 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import CalculatorForm from '@/components/CalculatorForm'
+import ResultDisplay from '@/components/ResultDisplay'
+import styles from '@/App.module.scss'
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App: React.FC = () => {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className={styles.container}>
+      <div className={styles.card}>
+        <header className={styles.header}>
+          <h1 className={styles.title}>SHOLEF 포병 계산기</h1>
+          <p className={styles.subtitle}>Arma 3 - 155mm 자주포</p>
+        </header>
+
+        <main className={styles.main}>
+          <CalculatorForm />
+          <div className={styles.divider}></div>
+          <ResultDisplay />
+        </main>
+
+        <footer className={styles.footer}>
+          <p className={styles.footerText}>
+            계산은 Arma 3 표준 탄도학을 기반으로 합니다. 게임 내에서 항상 확인 사격이 필요합니다.
+          </p>
+        </footer>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   )
 }
 

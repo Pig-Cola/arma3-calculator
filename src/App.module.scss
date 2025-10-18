@@ -1,0 +1,66 @@
+.container {
+  min-height: 100vh;
+  background-color: var(--app-bg-primary);
+  color: var(--app-text-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--app-spacing-md);
+  font-family: 'Courier New', monospace;
+}
+
+.card {
+  width: 100%;
+  max-width: 28rem;
+  margin: 0 auto;
+  background-color: var(--app-bg-secondary);
+  border-radius: 1rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--app-border-color);
+  overflow: hidden;
+}
+
+.header {
+  padding: var(--app-spacing-lg);
+  background-color: rgba(17, 24, 39, 0.5);
+  border-bottom: 1px solid var(--app-border-color);
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  color: var(--app-accent-green);
+  letter-spacing: 0.1em;
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  text-align: center;
+  color: var(--app-text-secondary);
+  margin-top: var(--app-spacing-xs);
+}
+
+.main {
+  padding: calc(var(--app-spacing-lg) * 2);
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--app-spacing-lg) * 2);
+}
+
+.divider {
+  border-top: 1px solid var(--app-border-color);
+}
+
+.footer {
+  padding: var(--app-spacing-md);
+  background-color: rgba(17, 24, 39, 0.5);
+  border-top: 1px solid var(--app-border-color);
+  text-align: center;
+}
+
+.footerText {
+  font-size: 0.75rem;
+  color: var(--app-text-secondary);
+}
