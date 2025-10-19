@@ -9,4 +9,12 @@ export default defineConfig( {
       '@': '/src',
     },
   },
+  build: {
+    rolldownOptions: {
+      input: {
+        'index.html': 'index.html',
+        '404.html': '404.html',
+      },
+    },
+  },
 } )

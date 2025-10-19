@@ -7,12 +7,14 @@ interface CalculatorStore {
   // 상태
   firingMode: FiringMode
   inputs: CalculationInput
+  isLinearInterpolationMode: boolean
   result: CalculationResult | null
 
   // 액션
   setFiringMode: ( mode: FiringMode ) => void
   updateInput: ( key: keyof CalculationInput, value: number ) => void
   calculate: () => void
+  toggleIsLinearInterpolationMode: () => void
 }
 
 export const useCalculatorStore = create<CalculatorStore>()(
@@ -26,6 +28,7 @@ export const useCalculatorStore = create<CalculatorStore>()(
         selfElevation: 50,
       },
       result: null,
+      isLinearInterpolationMode: false,
 
       // 액션들
       setFiringMode: ( mode ) => set( { firingMode: mode } ),
@@ -43,12 +46,18 @@ export const useCalculatorStore = create<CalculatorStore>()(
         const calculationResult = calculateFireSolution( inputs, firingMode )
         set( { result: calculationResult } )
       },
+
+      toggleIsLinearInterpolationMode: () =>
+        set( ( state ) => ( {
+          isLinearInterpolationMode: !state.isLinearInterpolationMode,
+        } ) ),
     } ),
     {
       name: 'arma3-calculator-storage',
       partialize: ( state ) => ( {
         firingMode: state.firingMode,
         inputs: state.inputs,
+        isLinearInterpolationMode: state.isLinearInterpolationMode,
         // result는 저장하지 않음 (계산 결과는 휘발성)
       } ),
     },

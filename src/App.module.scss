@@ -8,6 +8,8 @@
   justify-content: center;
   padding: var(--app-spacing-md);
   font-family: 'Courier New', monospace;
+
+  --app-spacing-lg: var(--app-spacing-md-lg);
 }
 
 .card {
