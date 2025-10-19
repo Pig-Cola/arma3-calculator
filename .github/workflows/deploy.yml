@@ -26,8 +26,8 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm approve-builds
-      - run: pnpm i
+        run: pnpm i
+      - run: pnpm approve-builds
       - name: Build website
         run: pnpm run build
 
