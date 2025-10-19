@@ -2,13 +2,16 @@ import CalculatorForm from '@/components/CalculatorForm'
 import ResultDisplay from '@/components/ResultDisplay'
 import styles from '@/App.module.scss'
 
+import packageJson from '@/../package.json'
+
 const App: React.FC = () => {
   return (
     <div className={styles.container}>
       <div className={styles.card}>
         <header className={styles.header}>
+          <h1 className={styles.title}>ARMA 3</h1>
           <h1 className={styles.title}>SHOLEF 포병 계산기</h1>
-          <p className={styles.subtitle}>Arma 3 - 155mm 자주포</p>
+          <p className={styles.subtitle}>version {packageJson.version}</p>
         </header>
 
         <main className={styles.main}>

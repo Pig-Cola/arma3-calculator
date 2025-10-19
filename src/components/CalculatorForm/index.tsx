@@ -9,7 +9,8 @@ import { Label } from '@/components/ui/label'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useCalculatorStore } from '@/store/useCalculatorStore'
 import styles from './index.module.scss'
-import { useState } from 'react'
+import { Switch } from '@/components/ui/switch'
+import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
 
 const InputField: React.FC<{
   label: string
@@ -19,9 +20,6 @@ const InputField: React.FC<{
   unit: string
   icon: React.ReactNode
 }> = ( { label, value, onChange, name, unit, icon } ) => {
-  const [_forceUpdate, setForceUpdate] = useState( 0 )
-  const forceUpdate = () => setForceUpdate( ( prev ) => prev + 1 )
-
   return (
     <div className={styles.fieldGroup}>
       <Label htmlFor={name} className="text-gray-400">
@@ -30,13 +28,11 @@ const InputField: React.FC<{
       <div className={styles.inputWrapper}>
         <div className={styles.icon}>{icon}</div>
         <Input
-          key={_forceUpdate}
-          type="number"
+          inputMode="numeric"
           id={name}
           name={name}
-          value={value}
+          value={/* `${value}` */ value}
           onChange={onChange}
-          onBlur={forceUpdate}
           className="pl-11 pr-12 h-11 bg-gray-900/70 border-gray-700 text-gray-200 focus-visible:ring-green-500 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-800"
           placeholder="0"
           aria-label={label}
@@ -51,14 +47,17 @@ const CalculatorForm: React.FC = () => {
   const {
     inputs: { distance, targetElevation, selfElevation },
     firingMode,
+    // isLinearInterpolationMode,
+
     updateInput,
     setFiringMode,
     calculate,
+    // toggleIsLinearInterpolationMode,
   } = useCalculatorStore()
 
   const handleInputChange = ( e: React.ChangeEvent<HTMLInputElement> ) => {
     const { name, value } = e.target
-    updateInput( name as keyof CalculationInput, value === '' ? 0 : parseInt( value ) )
+    updateInput( name as keyof CalculationInput, value === '' ? 0 : parseInt( value ) || 0 )
   }
 
   const handleSubmit = ( e: React.FormEvent ) => {
@@ -112,6 +111,41 @@ const CalculatorForm: React.FC = () => {
           onChange={handleInputChange}
           unit="m"
           icon={<ElevationIcon />}
+        />
+      </div>
+
+      <div style={{ display: 'flex', flexFlow: 'row nowrap', alignItems: 'center', gap: 'var(--app-spacing-md)' }}>
+        <div
+          style={{
+            width: '100%',
+            display: 'flex',
+            flexFlow: 'row nowrap',
+            alignItems: 'center',
+            gap: 'var(--app-spacing-sm)',
+            justifyContent: 'flex-start',
+          }}
+        >
+          <Label htmlFor="test" className="text-gray-400">
+            <del>선형 보간 계산법 적용</del> (현재 상시 적용 중)
+          </Label>
+          <Popover>
+            <PopoverTrigger style={{alignSelf: 'flex-start'}}>
+              <p>ⓘ</p>
+            </PopoverTrigger>
+            <PopoverContent
+              side="top"
+              style={{ backgroundColor: 'var(--app-bg-secondary)', borderColor: 'var(--app-border-color)' }}
+            >
+              비활성화 시 특별한 가중치를 통한 계산이 적용됨.
+            </PopoverContent>
+          </Popover>
+        </div>
+        <Switch
+          id="test"
+          checked={true}
+          disabled={true}
+          // checked={isLinearInterpolationMode}
+          // onCheckedChange={() => toggleIsLinearInterpolationMode()}
         />
       </div>
 
